@@ -145,20 +145,19 @@ amounts that were greater than at least one of the orders on September 10th 2012
 --);
 
 /*27. Write a query in sql to find the name, city, and the total sum of orders amount a salesman collects.
-Salesman should not belong to the cities where any of the customer belongs.*/
+Salesman should belong to the cities where any of the customer belongs.*/
 
---select a.name, a.city, subquery.sum_purch_amt from Inventory.Salesman a,
---(
---	select o.salesman_id, sum(o.purch_amt) as 'sum_purch_amt' from  Inventory.Orders o
---	group by o.salesman_id
---) as subquery
---where a.salesman_id in 
---(
---	select s.salesman_id from Inventory.Salesman s, Inventory.Customer c
---		where s.city = c.city
---)
---and 
---subquery.salesman_id = a.salesman_id;
+select a.salesman_id, a.name, a.city, subquery.sum_purch_amt from Inventory.Salesman a,
+(
+	select o.salesman_id, sum(o.purch_amt) as 'sum_purch_amt' from  Inventory.Orders o
+	group by o.salesman_id
+) as subquery
+where a.city in 
+(
+	select distinct c.city from Inventory.Customer c
+)
+and 
+subquery.salesman_id = a.salesman_id;
 
 /*28. Write a query to get all the information for those customers whose grade is not as the grade 
 of customer who belongs to the city London. */

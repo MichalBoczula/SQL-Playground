@@ -2,7 +2,8 @@
 customer name and their cities for the salesmen and customer who belongs to the same city.*/
 
 --SELECT s.name, s.city, s.commission, i.cust_name from Inventory.Salesman s
---join Inventory.Customer i on i.salesman_id = s.salesman_id;
+--join Inventory.Customer i on i.salesman_id = s.salesman_id
+--where i.city = s.city;
 
 /*2. Write a SQL statement to make a list with order no, purchase amount, customer name and their 
 cities for those orders which order amount between 500 and 2000.*/
@@ -103,7 +104,6 @@ above order amount 2000 and must have a grade, or he may not have placed any ord
 --join Inventory.Customer c on c.customer_id = o.customer_id
 --where  o.purch_amt > 2000 and c.grade is not null;
 	
-
 /*15. Write a SQL statement to make a report with customer name, city, order no. order date, purchase amount
 for those customers from the existing list who placed one or more orders or which order(s)
 have been placed by the customer who is not on the list. */
