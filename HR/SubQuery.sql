@@ -153,3 +153,53 @@ use W3Resource;
 --			select c.country_id from HR.Countries c
 --			where c.country_name = 'Canada')));
 
+
+--30. Write a query to find out which employees have a manager who works for a department based in the US without managers.
+
+--SELECT *
+--FROM   hr.employees e
+--WHERE  e.manager_id IN (SELECT DISTINCT e.manager_id
+--                        FROM   hr.employees e
+--                        WHERE  e.manager_id IN (SELECT d.manager_id
+--                                                FROM   hr.departments d
+--                                                WHERE  d.location_id IN
+--                                                       (SELECT l.location_id
+--                                                        FROM   hr.locations l
+--                                                        WHERE
+--                                               l.country_id = 'US')))
+--       AND e.employee_id <> e.manager_id;
+
+--32. Write a query to get the details of employees who are managers. 
+
+--select * from HR.Employees e
+--where e.employee_id in (
+--	select distinct d.manager_id from HR.Departments d);
+
+--34. Write a query to display the employee id, name ( first name and last name ), salary, department name and city 
+--for all the employees who gets the salary as the salary earn by the employee which is maximum 
+--within the joining person January 1st, 2002 and December 31st, 2003. 
+
+--select concat(e.first_name, ' ' ,e.last_name) as 'name', e.salary, d.department_name, l.city  from HR.Employees e 
+--join HR.Departments d on e.department_id = d.department_id
+--join HR.Locations l on d.location_id = l.location_id
+--where e.salary in(
+--	select distinct e.salary from HR.Employees e
+--	where e.hire_date > '2002-01-01'
+--	and e.hire_date < '2003-12-31');
+
+--41. Write a query in SQL to display the first and last name, and department code for all employees who work in the department Marketing. 
+
+--select e.first_name, e.last_name, e.department_id from HR.Employees e
+--where e.department_id = (
+--	select d.department_id from HR.Departments d
+--	where d.department_name = 'Marketing');
+
+--46. Write a query in SQL to display the first and last name, salary and department ID 
+--for those employees whose department is located in the city Toronto. 
+
+--select e.first_name, e.last_name, e.department_id from HR.Employees e
+--where e.department_id = (
+--	select d.department_id from HR.Departments d
+--	where d.location_id = (
+--		select l.location_id from HR.Locations l
+--		where l.city = 'Toronto'));
