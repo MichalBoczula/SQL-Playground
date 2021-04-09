@@ -203,3 +203,43 @@ use W3Resource;
 --	where d.location_id = (
 --		select l.location_id from HR.Locations l
 --		where l.city = 'Toronto'));
+
+--48. Write a query in SQL to display the the details of those departments which max salary is 12000 
+--or above for those employees who already done one or more jobs. 
+
+--select  * from HR.Departments d
+--where d.department_id in(
+--	select e.department_id from HR.Employees e
+--	group by e.department_id
+--	having MAX(e.salary) <= 12000);
+
+--49. Write a query in SQL to display the detail information of those departments which starting salary is at least 12000.
+
+--select * from HR.Departments d
+--where d.department_id in(
+--	select e.department_id from HR.Employees e
+--	group by e.department_id
+--	having Min(e.salary) >= 12000);
+
+--50. Write a query in SQL to display the full name (first and last name) of manager who is supervising 4 or more employees.
+
+--select concat(e.first_name, ' ', e.last_name) as 'FullName' from HR.Employees e
+--where e.employee_id in (
+--	select e.manager_id from HR.Employees e
+--	group by e.manager_id
+--	having COUNT(e.manager_id) >= 4);
+
+--51. Write a query in SQL to display the details of the current job for those employees who worked as a Sales Representative in the past.
+
+--select * from HR.Employees e
+--where e.employee_id =(
+--	select jh.employee_id from HR.Job_History jh
+--	where jh.job_id = (
+--		select j.job_id from HR.Jobs j
+--		where j.job_title = 'Sales Representative'));
+
+--55. Write a query in SQL to display all the information of those employees who did not have any job in the past.  
+
+--select * from HR.Employees e
+--where e.employee_id not in (
+--	select jh.employee_id from HR.Job_History jh);
