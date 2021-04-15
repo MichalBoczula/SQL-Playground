@@ -72,3 +72,57 @@ use W3Resource;
 
 --select concat(e.first_name, ' ', e.last_name) as 'name' , e.job_id, (g.highest_sal - e.salary) as 'diffance' from HR.Employees e
 --join HR.Job_Grades g on e.salary between g.lowest_sal and g.highest_sal;
+
+--15. Write a query in SQL to display the name of the department, average salary and number of employees 
+--working in that department who got commission.
+ 
+--select d.department_name, 
+--	(
+--		select avg(e.salary)  from HR.Employees e 
+--		where d.department_id = e.department_id 
+--		group by e.department_id
+--	) as 'avg_salary',
+--	(
+--		select count(e.department_id)  from HR.Employees e 
+--		where d.department_id = e.department_id
+--		group by e.department_id
+--	) as 'employees'
+--from HR.Departments d;
+
+--21. Write a query in SQL to display the country name, city, and number of those departments where at leaste 2 employees are working.
+
+--select d.department_name, c.country_name, l.city from HR.Departments d
+--join HR.Locations l on d.location_id = l.location_id
+--join HR.Countries c on l.country_id = c.country_id
+--where d.department_id in 
+--(
+--	select e.department_id from HR.Employees e
+--	group by e.department_id
+--	having COUNT(e.employee_id) > 2
+--);
+
+--22. Write a query in SQL to display the department name, full name (first and last name) of manager, and their city.
+
+--select CONCAT(e.first_name, ' ', e.last_name) as 'emp_fullname', d.department_name, l.location_id from HR.Employees e
+--join HR.Departments d on e.department_id = d.department_id
+--join HR.Locations l on d.location_id = l.location_id
+--where e.employee_id in 
+--(
+--	select e.manager_id from HR.Employees e
+--);
+
+--24. Write a query in SQL to display the full name (first and last name), and salary
+--of those employees who working in any department located in Seatlle. 
+
+--select CONCAT(e.first_name, ' ', e.last_name) as 'emp_fullname', e.salary, d.department_name from HR.Employees e
+--join HR.Departments d on e.department_id = d.department_id
+--join HR.Locations l on d.location_id = l.location_id
+--where l.city = 'Seattle';
+
+--27. Write a query in SQL to display the full name (first and last name ) 
+--of employee with ID and name of the country presently where (s)he is working.
+
+--select concat(e.first_name, ' ', e.last_name) as 'fullname', c.country_id, c.country_name from HR.Employees e
+--join HR.Departments d on e.department_id = d.department_id
+--join HR.Locations l on d.location_id = l.location_id
+--join HR.Countries c on l.country_id = c.country_id;
